@@ -20,32 +20,36 @@ function buildLayersOptions(formOptions) {
 }
 
 export default {
-  name: 'Colored polygon layer',
-  options: [
-    {
-      key: 'layers',
-      label: 'Слои',
-      type: 'array',
-      item: {
-        fields: [
-          { key: 'layerKey', label: 'Слой (только полигоны)', type: 'select', options: buildLayersOptions },
-          { key: 'property', label: 'Поле', type: 'select', options: buildFieldsOptions },
-          {
-            key: 'colors',
-            label: 'Раскраска',
-            type: 'array',
-            item: {
-              fields: [
-                { key: 'value', label: 'Значение', type: 'string' },
-                { key: 'color', label: 'Цвет', type: 'color' }
-              ]
+  form: {
+    fields: [
+      {
+        key: 'layers',
+        label: 'Слои',
+        input: 'array',
+        item: {
+          fields: [
+            {
+              key: 'layerKey',
+              label: 'Слой (только полигоны)',
+              input: 'select',
+              inputOptions: { options: buildLayersOptions }
+            },
+            { key: 'property', label: 'Поле', input: 'select', inputOptions: { options: buildFieldsOptions } },
+            {
+              key: 'colors',
+              label: 'Раскраска',
+              input: 'array',
+              item: {
+                fields: [
+                  { key: 'value', label: 'Значение', input: 'string' },
+                  { key: 'color', label: 'Цвет', input: 'color' }
+                ]
+              }
             }
-          }
-        ]
+          ]
+        }
       }
-    }
-  ],
-  connects: {
-    saga
-  }
+    ]
+  },
+  saga
 }

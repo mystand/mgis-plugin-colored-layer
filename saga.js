@@ -13,12 +13,16 @@ function* setColorProperty() {
 
   layersConfig.forEach((layerConfig) => {
     const { layerKey, property } = layerConfig
-    map.setPaintProperty(layerKey,
-      'fill-color', {
-        property,
-        type: 'categorical',
-        stops: (layerConfig.colors || []).map(colorConfig => [colorConfig.value, colorConfig.color])
-      })
+    const colorFunc = {
+      property,
+      type: 'categorical',
+      stops: (layerConfig.colors || []).map(colorConfig => [colorConfig.value, colorConfig.color])
+    }
+
+    map.setPaintProperty(layerKey, 'fill-color', colorFunc)
+    // todo update mapbox gl
+    // https://github.com/mapbox/mapbox-gl-js/pull/3033
+    // map.setPaintProperty(`${layerKey}-border`, 'line-color', colorFunc)
   })
 }
 
