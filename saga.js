@@ -19,7 +19,8 @@ function* setColorProperty() {
       stops: (layerConfig.colors || []).map(colorConfig => [colorConfig.value, colorConfig.color])
     }
 
-    map.setPaintProperty(layerKey, 'fill-color', colorFunc)
+    const isLayerPresent = map.getLayer(layerKey) != null
+    if (isLayerPresent) map.setPaintProperty(layerKey, 'fill-color', colorFunc)
     // todo update mapbox gl
     // https://github.com/mapbox/mapbox-gl-js/pull/3033
     // map.setPaintProperty(`${layerKey}-border`, 'line-color', colorFunc)
